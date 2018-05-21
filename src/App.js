@@ -6,6 +6,7 @@ import Register from './components/Register/Register';
 import Navigation from './components/Navigation/Navigation';
 import HolidayList from './components/HolidayList/HolidayList';
 import HolidayDetails from './components/HolidayDetails/HolidayDetails';
+import NewHolidayButton from './components/NewHolidayButton/NewHolidayButton';
 import './App.css';
 
 class App extends Component {
@@ -66,6 +67,7 @@ class App extends Component {
           ? ( !(holidays.length)
             ? <h1>Loading</h1>
             : <div>
+                <NewHolidayButton onRouteChange={this.onRouteChange}/>
                 <HolidayList
                   holidays={holidays}
                   //showHolidayDetails={this.showHolidayDetails}
