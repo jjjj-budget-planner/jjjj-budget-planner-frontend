@@ -1,4 +1,5 @@
 import React from 'react';
+import CancelButton from '../CancelButton/CancelButton';
 
 class NewHoliday extends React.Component {
   constructor(props) {
@@ -28,9 +29,11 @@ class NewHoliday extends React.Component {
       })
     })
       //.then(response => response.json())
-      .then(user => {
-          this.props.onRouteChange('home');
-      })
+    .then(user => {
+        this.props.onRouteChange('newHolidayAdded');
+        //this.props.onRouteChange('home');
+        console.log('NEW HOLIDAY ADDED');
+    })
   }
 
   render() {
@@ -39,7 +42,7 @@ class NewHoliday extends React.Component {
         <main className="pa4 black-80">
           <div className="measure">
             <fieldset id="newHoliday" className="ba b--transparent ph0 mh0">
-              <legend className="f1 fw6 ph0 mh0">Add your new holiday</legend>
+              <legend className="f1 fw6 ph0 mh0">New holiday</legend>
               <div className="mt3">
                 <label className="db fw6 lh-copy f6" htmlFor="name">Destination</label>
                 <input
@@ -62,12 +65,15 @@ class NewHoliday extends React.Component {
               </div>
             </fieldset>
             <div className="">
-              <input
-                className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-                type="submit"
-                value="Register"
-                onClick={this.onSubmitNewHoliday}
-              />
+              <div>
+                <input
+                  className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+                  type="submit"
+                  value="Register"
+                  onClick={this.onSubmitNewHoliday}
+                />
+                <CancelButton onRouteChange={this.props.onRouteChange}/>
+              </div>
             </div>
           </div>
         </main>

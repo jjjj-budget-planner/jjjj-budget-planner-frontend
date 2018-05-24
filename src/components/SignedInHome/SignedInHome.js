@@ -43,6 +43,13 @@ class SignedInHome extends Component {
       this.setState(this.initialState);
     } else if (route === 'home') {
       this.setState({isSignedIn: true});
+    } else if (route === 'cancelNewHoliday') {
+      console.log('state: cancel holiday');
+      this.setState({route: 'home'});
+    } else if (route === 'newHolidayAdded') {
+      console.log('state: new holiday');
+      this.setState(this.initialState);
+      console.log(this.state.route);
     }
   }
 
@@ -56,7 +63,7 @@ class SignedInHome extends Component {
       <div className='App'>
         { route === 'home'
           ? ( !(holidays.length)
-            ? (<h1>Loading</h1>)
+            ? (<NewHolidayButton onRouteChange={this.onRouteChange}/>)
             : (
                 <div>
                   <NewHolidayButton onRouteChange={this.onRouteChange}/>
