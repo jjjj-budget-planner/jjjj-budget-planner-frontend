@@ -4,8 +4,7 @@ import Description from './components/Description/Description';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
 import Navigation from './components/Navigation/Navigation';
-import HolidayList from './components/HolidayList/HolidayList';
-import HolidayDetails from './components/HolidayDetails/HolidayDetails';
+import SignedInHome from './components/SignedInHome/SignedInHome';
 import './App.css';
 
 class App extends Component {
@@ -21,24 +20,13 @@ class App extends Component {
     //this.showHolidayDetails = this.showHolidayDetails.bind(this);
   }
 
-  // fetchHolidayDetail = (holidayId) => {
-  //   console.log(`http://localhost:8080/holiday/${holidayId}`);
-  // }
-
-  fetchHolidays = () => {
-    return fetch('http://localhost:8080/holidays')
-      .then(response => response.json())
-      .then(holidays => this.setState({holidays: holidays}))
-      .catch(err => console.log(err))
-  }
-
   // showHolidayDetails = (event) => {
   //   console.log(event);
   // }
 
   onSignIn = () => {
     this.onRouteChange('home');
-    this.fetchHolidays();
+    /*this.fetchHolidays();*/
   }
 
   // this is where we control routing
@@ -62,33 +50,27 @@ class App extends Component {
       <div className='App'>
         <Navigation  isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>
         <Banner />
-        { route === 'home'
-          ? ( !(holidays.length)
-            ? <h1>Loading</h1>
-            : <div>
-                <HolidayList
-                  holidays={holidays}
-                  //showHolidayDetails={this.showHolidayDetails}
-                  //holidayId={holidayId}
+        {
+          route === 'signin'
+          ? (
+              <div>
+                <Description />
+                <SignIn
+                  onRouteChange={this.onRouteChange}
+                  onSignIn={this.onSignIn}
                 />
               </div>
             )
           : (
-              route === 'holidayDetails'
-              ? <div>
-                  <HolidayDetails holidayId={holidayId}/>
+              route === 'home'
+              ? (
+                <div>
+                  <SignedInHome />
                 </div>
-                : (
-                  route === 'signin'
-                  ? <div>
-                      <Description />
-                      <SignIn
-                        onRouteChange={this.onRouteChange}
-                        onSignIn={this.onSignIn}
-                      />
-                    </div>
-                    : <Register onRouteChange={this.onRouteChange}/>
-                )
+              )
+              : (
+                  <Register onRouteChange={this.onRouteChange}/>
+              )
             )
         }
       </div>
